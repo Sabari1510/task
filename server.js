@@ -3,7 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 // Use MongoDB Atlas connection string from environment variable for deployment
-mongoose.connect(process.env.DATABASE_URL);
+const dbUrl = process.env.DATABASE_URL;
+mongoose.connect(dbUrl);
 
 const app = express();
 const db = mongoose.connection;
@@ -22,4 +23,5 @@ app.use("/api/tasks",tasRouter)
 
 
 
-app.listen(process.env.PORT,()=>console.log(`server is listening at port ${process.env.PORT}`));
+const port = process.env.PORT || 3001;
+app.listen(port,()=>console.log(`server is listening at port ${port}`));
